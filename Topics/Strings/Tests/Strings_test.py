@@ -1,7 +1,9 @@
+import string
 import pytest
 
 from Topics.Strings.count_vowels import count_vowels
 from Topics.Strings.format_phone_number import format_phone_number
+from Topics.Strings.is_valid_email import is_valid_email
 from Topics.Strings.palindrom import is_palindrome
 
 
@@ -18,7 +20,6 @@ def test_function(string):
     assert is_palindrome(string) == True
 
 
-
 def test_count_vowels():
     assert count_vowels("hEllo") == 2
 
@@ -30,3 +31,11 @@ def test_format_phone_number():
 
 def test_format_phone_number_2():
     assert format_phone_number(39991234567) == "+3 (999) 123-45-67"
+
+@pytest.mark.parametrize("string", ["somemail@gmail.com", "coock123@gmail.ru", "stupidDump12@yahoo.com"])
+def test_format_email(string):
+    assert is_valid_email(string) == True
+#
+@pytest.mark.parametrize("string", ["<EMAIL>", "stupiddump.com", "stupiddump@"])
+def test_is_valid_email_false(string):
+    assert is_valid_email(string) == False
